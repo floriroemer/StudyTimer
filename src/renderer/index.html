@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyTimer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="backdrop backdrop-left"></div>
+      <div class="backdrop backdrop-right"></div>
+
+      <header class="titlebar card">
+        <div class="titlebar-left drag-region">
+          <div class="brand-lockup">
+            <p class="eyebrow" id="brand-eyebrow">Adaptive focus timer</p>
+            <div class="brand-title-row">
+              <div class="brand-name-wrap">
+                <img class="brand-logo" src="../../Logo.png" alt="StudyTimer logo" />
+                <h1 class="brand-title">StudyTimer</h1>
+              </div>
+              <div class="session-controls no-drag">
+                <button class="session-adjust-button" id="session-minus-button" type="button" aria-label="Decrease session count">-</button>
+                <span class="top-chip" id="session-counter">0 Sessions</span>
+                <button class="session-adjust-button" id="session-plus-button" type="button" aria-label="Increase session count">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="titlebar-center drag-region">
+          <div class="system-time-panel">
+            <span class="clock-label" id="system-time-label">System time</span>
+            <strong id="system-time">00:00:00</strong>
+          </div>
+        </div>
+
+        <div class="titlebar-actions no-drag">
+          <button class="titlebar-button settings-toggle" id="settings-toggle-button" type="button">
+            <span id="settings-button-label">Settings</span>
+          </button>
+          <button class="titlebar-button window-button" id="minimize-button" type="button" aria-label="Minimize window">&#9472;</button>
+          <button class="titlebar-button window-button" id="maximize-button" type="button" aria-label="Maximize window">&#9723;</button>
+          <button class="titlebar-button window-button close-button" id="close-button" type="button" aria-label="Close window">&#10005;</button>
+        </div>
+
+        <section class="settings-popover card hidden" id="settings-popover">
+          <div class="settings-header">
+            <div>
+              <p class="eyebrow" id="settings-eyebrow">Settings</p>
+              <h2 id="settings-title">Session setup</h2>
+            </div>
+          </div>
+
+          <div class="settings-block">
+            <label class="inline-field">
+              <span id="language-label">Language</span>
+              <select id="language-select">
+                <option value="en">English</option>
+                <option value="de">Deutsch</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="settings-block">
+            <div class="session-settings-head">
+              <span id="counted-sessions-label">Count these modes as sessions</span>
+            </div>
+            <div class="counted-mode-grid">
+              <label class="checkbox-field">
+                <input id="count-focus-checkbox" data-mode="focus" type="checkbox" />
+                <span id="count-focus-label">Focus</span>
+              </label>
+              <label class="checkbox-field">
+                <input id="count-shortBreak-checkbox" data-mode="shortBreak" type="checkbox" />
+                <span id="count-short-label">Short break</span>
+              </label>
+              <label class="checkbox-field">
+                <input id="count-longBreak-checkbox" data-mode="longBreak" type="checkbox" />
+                <span id="count-long-label">Long break</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <section class="settings-card">
+              <div class="settings-card-head">
+                <span id="focus-settings-label">Focus</span>
+                <strong id="focus-duration-preview">00h 25m 00s</strong>
+              </div>
+              <div class="time-input-row">
+                <label class="time-field">
+                  <span id="hours-label-focus">Hours</span>
+                  <input id="focus-hours" data-mode="focus" data-unit="hours" type="number" min="0" max="99" step="1" />
+                </label>
+                <label class="time-field">
+                  <span id="minutes-label-focus">Minutes</span>
+                  <input id="focus-minutes" data-mode="focus" data-unit="minutes" type="number" min="0" max="59" step="1" />
+                </label>
+                <label class="time-field">
+                  <span id="seconds-label-focus">Seconds</span>
+                  <input id="focus-seconds" data-mode="focus" data-unit="seconds" type="number" min="0" max="59" step="1" />
+                </label>
+              </div>
+            </section>
+
+            <section class="settings-card">
+              <div class="settings-card-head">
+                <span id="short-settings-label">Short break</span>
+                <strong id="shortBreak-duration-preview">00h 05m 00s</strong>
+              </div>
+              <div class="time-input-row">
+                <label class="time-field">
+                  <span id="hours-label-short">Hours</span>
+                  <input id="shortBreak-hours" data-mode="shortBreak" data-unit="hours" type="number" min="0" max="99" step="1" />
+                </label>
+                <label class="time-field">
+                  <span id="minutes-label-short">Minutes</span>
+                  <input id="shortBreak-minutes" data-mode="shortBreak" data-unit="minutes" type="number" min="0" max="59" step="1" />
+                </label>
+                <label class="time-field">
+                  <span id="seconds-label-short">Seconds</span>
+                  <input id="shortBreak-seconds" data-mode="shortBreak" data-unit="seconds" type="number" min="0" max="59" step="1" />
+                </label>
+              </div>
+            </section>
+
+            <section class="settings-card">
+              <div class="settings-card-head">
+                <span id="long-settings-label">Long break</span>
+                <strong id="longBreak-duration-preview">00h 15m 00s</strong>
+              </div>
+              <div class="time-input-row">
+                <label class="time-field">
+                  <span id="hours-label-long">Hours</span>
+                  <input id="longBreak-hours" data-mode="longBreak" data-unit="hours" type="number" min="0" max="99" step="1" />
+                </label>
+                <label class="time-field">
+                  <span id="minutes-label-long">Minutes</span>
+                  <input id="longBreak-minutes" data-mode="longBreak" data-unit="minutes" type="number" min="0" max="59" step="1" />
+                </label>
+                <label class="time-field">
+                  <span id="seconds-label-long">Seconds</span>
+                  <input id="longBreak-seconds" data-mode="longBreak" data-unit="seconds" type="number" min="0" max="59" step="1" />
+                </label>
+              </div>
+            </section>
+          </div>
+
+          <p class="settings-note" id="settings-note">Changes are saved instantly and used for the next session.</p>
+        </section>
+      </header>
+
+      <main class="workspace">
+        <section class="hero card">
+          <div class="hero-top">
+            <div>
+              <p class="eyebrow" id="mode-eyebrow">Current mode</p>
+              <h2 class="mode-title" id="mode-title">Focus</h2>
+            </div>
+            <div class="hero-meta">
+              <span class="top-chip" id="next-chip">Next: Focus</span>
+            </div>
+          </div>
+
+          <div class="hero-body">
+            <div class="timer-stage">
+              <div class="timer-ring" id="timer-ring">
+                <div class="timer-core">
+                  <div class="timer-time" id="timer-display">00:25:00</div>
+                  <div class="timer-caption" id="timer-caption">Ready for your next focus block.</div>
+                </div>
+              </div>
+            </div>
+
+            <section class="mode-dock card mode-dock-inner">
+              <div class="mode-dock-head">
+                <div>
+                  <p class="eyebrow" id="modes-eyebrow">Modes</p>
+                  <h2 class="dock-title" id="modes-title">Jump between sessions</h2>
+                </div>
+              </div>
+
+              <div class="mode-grid">
+                <button class="mode-button active" data-mode="focus" type="button">
+                  <span class="mode-button-label">Focus</span>
+                  <strong>00h 25m 00s</strong>
+                </button>
+                <button class="mode-button" data-mode="shortBreak" type="button">
+                  <span class="mode-button-label">Short break</span>
+                  <strong>00h 05m 00s</strong>
+                </button>
+                <button class="mode-button" data-mode="longBreak" type="button">
+                  <span class="mode-button-label">Long break</span>
+                  <strong>00h 15m 00s</strong>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <div class="control-row">
+            <button class="primary-button" id="start-pause-button" type="button">Start</button>
+            <button class="secondary-button" id="reset-button" type="button">Reset</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "name": "studytimer",
+  "version": "1.0.0",
+  "description": "A cross-platform desktop study timer built with Electron.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floriroemer/StudyTimer.git"
+  },
+  "keywords": [
+    "electron",
+    "timer",
+    "pomodoro",
+    "study"
+  ],
+  "author": "Florian Roemer",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/floriroemer/StudyTimer/issues"
+  },
+  "homepage": "https://github.com/floriroemer/StudyTimer#readme",
+  "build": {
+    "appId": "com.floriroemer.studytimer",
+    "productName": "StudyTimer",
+    "directories": {
+      "output": "release"
+    },
+    "icon": "Logo.png",
+    "files": [
+      "src/**/*",
+      "Logo.png",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "Logo.png",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "icon": "Logo.png",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility"
+    },
+    "mac": {
+      "icon": "Logo.png",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.productivity"
+    }
+  },
+  "devDependencies": {
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1"
+  }
+}
